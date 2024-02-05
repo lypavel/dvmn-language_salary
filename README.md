@@ -28,7 +28,7 @@ python3 main.py
 
 <details>
   <summary>Пример вывода скрипта</summary>
-  <img src="">
+  <img src="https://github.com/lypavel/dvmn-language_salary/assets/157053921/6ded61a0-8e55-4c47-aa45-606d4d82f229">
 </details>
 
 ***
