@@ -28,7 +28,10 @@ def sj_predict_rub_salary(vacancy: dict) -> int | None:
     salary_from = vacancy.get("payment_from")
     salary_to = vacancy.get("payment_to")
 
-    return predict_salary(salary_from, salary_to)
+    if any([salary_from, salary_to]):
+        return predict_salary(salary_from, salary_to)
+    else:
+        return None
 
 
 def sj_collect_stats(language: str = "") -> dict:
