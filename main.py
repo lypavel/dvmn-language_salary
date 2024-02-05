@@ -47,7 +47,7 @@ def main() -> None:
         except rq.exceptions.HTTPError as http_error:
             print(f"Ошибка соединения с сервером: {http_error}")
 
-    print(format_stats_output(hh_stats, title="HeadHunter Moscow"))
+    print(format_stats_output(hh_stats, title="HeadHunter Moscow"), end="\n\n")
     print(format_stats_output(sj_stats, title="Superjob Moscow"))
 
 
