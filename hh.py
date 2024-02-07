@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 import requests as rq
+from icecream import ic
 
 from salary_tools import predict_salary, count_average_salary
 
@@ -49,10 +50,11 @@ def hh_collect_stats(language: str = "") -> dict:
     pages = hh_response.get("pages")
     page = 0
 
-    while page <= pages:
+    while page < pages:
         response = hh_get_vacancies(payload)
         vacancies.extend(response.get("items"))
         page += 1
+        payload.update({"page": page})
 
     salaries = [
         hh_predict_rub_salary(x) for x in vacancies if hh_predict_rub_salary(x)
