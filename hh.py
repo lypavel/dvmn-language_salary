@@ -35,30 +35,33 @@ def hh_collect_stats(language: str = "") -> dict:
 
     town_id = "1"  # Moscow id
     vacancies_per_page = 100
+    page = 0
+    pages = 1
 
     payload = {
         "text": " ".join(["Программист", language]),
         "area": town_id,
         "per_page": vacancies_per_page,
         "date_from": date_from.isoformat()[:10],
-        "page": 0
+        "page": page
     }
 
     vacancies = []
 
-    hh_response = hh_get_vacancies(payload)
-    pages = hh_response.get("pages")
-    page = 0
-
     while page < pages:
         response = hh_get_vacancies(payload)
         vacancies.extend(response.get("items"))
+
+        vacancies_found = response.get("found")
         page += 1
+        pages = response.get("pages", 1)
+
         payload.update({"page": page})
 
     salaries = [
         hh_predict_rub_salary(x) for x in vacancies if hh_predict_rub_salary(x)
     ]
+
     try:
         average_salary = count_average_salary(salaries)
     except ZeroDivisionError:
@@ -66,7 +69,7 @@ def hh_collect_stats(language: str = "") -> dict:
 
     return {
         language: {
-            "vacancies_found": hh_response.get("found"),
+            "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
             "average_salary": average_salary
         }
