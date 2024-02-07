@@ -55,9 +55,12 @@ def sj_collect_stats(language: str = "") -> dict:
     sj_response = sj_get_vacancies(sj_secret_key, payload)
     vacancies = sj_response.get("objects")
 
-    salaries = [
-        sj_predict_rub_salary(x) for x in vacancies if sj_predict_rub_salary(x)
-    ]
+    salaries = []
+    for vacancy in vacancies:
+        salary = sj_predict_rub_salary(vacancy)
+        if not salary:
+            continue
+        salaries.append(salary)
 
     try:
         average_salary = count_average_salary(salaries)
