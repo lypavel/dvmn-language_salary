@@ -32,10 +32,13 @@ def hh_predict_rub_salary(vacancy: dict) -> int | None:
 def hh_collect_stats(language: str = "") -> dict:
     date_from = datetime.now() - timedelta(days=30)
 
+    town_id = "1"  # Moscow id
+    vacancies_per_page = 100
+
     payload = {
         "text": " ".join(["Программист", language]),
-        "area": "1",
-        "per_page": 100,
+        "area": town_id,
+        "per_page": vacancies_per_page,
         "date_from": date_from.isoformat()[:10],
         "page": 0
     }

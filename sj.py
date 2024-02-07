@@ -40,12 +40,15 @@ def sj_collect_stats(language: str = "") -> dict:
     sj_secret_key = os.environ["SJ_SECRET_KEY"]
 
     date_from = datetime.now() - timedelta(days=30)
+    town_id = 4  # Moscow id
+    search_category = 48  # id "Разработка, программирование"
+    vacancies_per_page = 100
 
     payload = {
-        "town": 4,
-        "catalogues": 48,
+        "town": town_id,
+        "catalogues": search_category,
         "keyword": language,
-        "count": 100,
+        "count": vacancies_per_page,
         "date_published_from": date_from.timestamp()
     }
 
