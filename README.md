@@ -10,7 +10,7 @@
 pip install -r requirements.txt
 ```
 
-2. Получите `Secret key` для [Superjob API](https://api.superjob.ru/) и разместите его в файле `.env`, расположенном в одной директории с файлами скрипта следующим образом:
+2. Получите `Secret key` для [Superjob API](https://api.superjob.ru/) и разместите его в файле `.env`, который должен быть расположен в одной директории с файлами скрипта:
 
 ```
 SJ_SECRET_KEY={secret_key}
