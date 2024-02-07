@@ -1,4 +1,7 @@
+import os
+
 import requests as rq
+from dotenv import load_dotenv
 from terminaltables import AsciiTable
 
 from hh import hh_collect_stats
@@ -37,13 +40,15 @@ def main() -> None:
         "1c"
     ]
 
+    sj_secret_key = os.environ.get("SJ_SECRET_KEY")
+
     hh_stats = {}
     sj_stats = {}
 
     for language in languages:
         try:
             hh_stats.update(hh_collect_stats(language))
-            sj_stats.update(sj_collect_stats(language))
+            sj_stats.update(sj_collect_stats(sj_secret_key, language))
         except rq.exceptions.HTTPError as http_error:
             print(f"Ошибка соединения с сервером: {http_error}")
 
@@ -52,4 +57,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    load_dotenv()
+
     main()

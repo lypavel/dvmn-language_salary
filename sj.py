@@ -1,8 +1,6 @@
-import os
 from datetime import datetime, timedelta
 
 import requests as rq
-from dotenv import load_dotenv
 
 from salary_tools import predict_salary, count_average_salary
 
@@ -34,11 +32,7 @@ def sj_predict_rub_salary(vacancy: dict) -> int | None:
         return None
 
 
-def sj_collect_stats(language: str = "") -> dict:
-    load_dotenv()
-
-    sj_secret_key = os.environ["SJ_SECRET_KEY"]
-
+def sj_collect_stats(sj_secret_key: str, language: str = "") -> dict:
     date_from = datetime.now() - timedelta(days=30)
     town_id = 4  # Moscow id
     search_category = 48  # id "Разработка, программирование"
