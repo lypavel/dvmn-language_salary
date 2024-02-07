@@ -50,7 +50,7 @@ def main() -> None:
             hh_stats.update(hh_collect_stats(language))
             sj_stats.update(sj_collect_stats(sj_secret_key, language))
         except rq.exceptions.HTTPError as http_error:
-            print(f"Ошибка соединения с сервером: {http_error}")
+            print(f"Ошибка соединения с сервером:\n{http_error}")
 
     print(format_stats_output(hh_stats, title="HeadHunter Moscow"), end="\n\n")
     print(format_stats_output(sj_stats, title="Superjob Moscow"))
