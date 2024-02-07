@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 import requests as rq
-from icecream import ic
 
 from salary_tools import predict_salary, count_average_salary
 
@@ -77,7 +76,3 @@ def hh_collect_stats(language: str = "") -> dict:
             "average_salary": average_salary
         }
     }
-
-
-if __name__ == "__main__":
-    print(hh_collect_stats())

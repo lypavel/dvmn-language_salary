@@ -74,7 +74,3 @@ def sj_collect_stats(language: str = "") -> dict:
             "average_salary": average_salary
         }
     }
-
-
-if __name__ == "__main__":
-    print(sj_collect_stats())
