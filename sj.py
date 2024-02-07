@@ -37,17 +37,29 @@ def sj_collect_stats(sj_secret_key: str, language: str = "") -> dict:
     town_id = 4  # Moscow id
     search_category = 48  # id "Разработка, программирование"
     vacancies_per_page = 100
+    page = 0
+    more_vacancies_avaliable = True
 
     payload = {
         "town": town_id,
         "catalogues": search_category,
         "keyword": language,
         "count": vacancies_per_page,
-        "date_published_from": date_from.timestamp()
+        "date_published_from": date_from.timestamp(),
+        "page": page
     }
 
-    sj_response = sj_get_vacancies(sj_secret_key, payload)
-    vacancies = sj_response.get("objects")
+    vacancies = []
+
+    while more_vacancies_avaliable:
+        response = sj_get_vacancies(sj_secret_key, payload)
+        vacancies.extend(response.get("objects"))
+
+        vacancies_found = response.get("total")
+        page += 1
+        more_vacancies_avaliable = response.get("more")
+
+        payload.update({"page": page})
 
     salaries = []
     for vacancy in vacancies:
@@ -63,7 +75,7 @@ def sj_collect_stats(sj_secret_key: str, language: str = "") -> dict:
 
     return {
         language: {
-            "vacancies_found": sj_response.get("total"),
+            "vacancies_found": vacancies_found,
             "vacancies_processed": len(salaries),
             "average_salary": average_salary
         }
