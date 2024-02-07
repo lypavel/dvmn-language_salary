@@ -58,9 +58,12 @@ def hh_collect_stats(language: str = "") -> dict:
 
         payload.update({"page": page})
 
-    salaries = [
-        hh_predict_rub_salary(x) for x in vacancies if hh_predict_rub_salary(x)
-    ]
+    salaries = []
+    for vacancy in vacancies:
+        salary = hh_predict_rub_salary(vacancy)
+        if not salary:
+            continue
+        salaries.append(salary)
 
     try:
         average_salary = count_average_salary(salaries)
