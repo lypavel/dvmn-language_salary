@@ -28,6 +28,8 @@ def format_stats_output(stats: dict, title: str = None) -> str:
 
 
 def main() -> None:
+    load_dotenv()
+
     languages = [
         "python",
         "java",
@@ -57,6 +59,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    load_dotenv()
-
     main()
