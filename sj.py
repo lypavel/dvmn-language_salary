@@ -59,7 +59,7 @@ def sj_collect_stats(sj_secret_key: str, language: str = "") -> dict:
         page += 1
         more_vacancies_avaliable = response.get("more")
 
-        payload.update({"page": page})
+        payload["page"]: page
 
     salaries = []
     for vacancy in vacancies:

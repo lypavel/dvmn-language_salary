@@ -55,7 +55,7 @@ def hh_collect_stats(language: str = "") -> dict:
         page += 1
         pages = response.get("pages", 1)
 
-        payload.update({"page": page})
+        payload["page"] = page
 
     salaries = []
     for vacancy in vacancies:
